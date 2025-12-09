@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 :: ============================================================
 :: CONFIGURATION
 :: ============================================================
-set "PYTHON_VER=3.13.9"
+set "PYTHON_VER=3.13.11"
 set "PYTHON_URL=https://www.python.org/ftp/python/%PYTHON_VER%/python-%PYTHON_VER%-embed-amd64.zip"
 set "PIP_URL=https://bootstrap.pypa.io/get-pip.py"
 
@@ -17,8 +17,8 @@ set "PTH_FILE=%PYTHON_DIR%\python313._pth"
 set "OLLAMA_DIR=%SCRIPTROOT%ollama"
 
 set "OLLAMA_ZIP=ollama-windows-amd64.zip"
-set "OLLAMA_DOWNLOAD_URL=https://github.com/ollama/ollama/releases/download/v0.13.1/ollama-windows-amd64.zip"
-set "OLLAMA_CHECKSUM_URL=https://github.com/ollama/ollama/releases/download/v0.13.1/sha256sum.txt"
+set "OLLAMA_DOWNLOAD_URL=https://github.com/ollama/ollama/releases/download/v0.13.2/ollama-windows-amd64.zip"
+set "OLLAMA_CHECKSUM_URL=https://github.com/ollama/ollama/releases/download/v0.13.2/sha256sum.txt"
 
 set "OLLAMA_BIN=%OLLAMA_DIR%\ollama.exe"
 set "OLLAMA_HOST=http://127.0.0.1:11435"

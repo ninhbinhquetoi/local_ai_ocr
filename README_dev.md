@@ -3,8 +3,8 @@
 # Local AI OCR (v2.0)
 
 ## Tech Stack
-- **Python:** Embeddable Python `3.13.9`
-- **Ollama:** `0.13.1`
+- **Python:** Embeddable Python `3.13.11`
+- **Ollama:** `0.13.2`
 - **deepseek-ocr:3b:** `0e7b018b8a22`
 - **Frontend:** PySide6 `6.10.1`
 - **src/res/node/mathjax:** `4.0.0`
