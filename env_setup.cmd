@@ -44,7 +44,9 @@ if exist "%PYTHON_BIN%" (
     )
 
     echo - Downloading Python %PYTHON_VER% Embeddable...
+    echo.
     "%WGET_BIN%" -O "%PYTHON_ZIP%" "%PYTHON_URL%"
+    echo.
     if !errorlevel! neq 0 goto :ERROR_NETWORK
 
     echo - Extracting to %PYTHON_DIR%...
@@ -79,7 +81,9 @@ if exist "%PYTHON_DIR%\Scripts\pip.exe" (
     if exist "get-pip.py" del "get-pip.py"
 
     echo - Downloading get-pip.py...
+    echo.
     "%WGET_BIN%" -O get-pip.py "%PIP_URL%"
+    echo.
     if !errorlevel! neq 0 goto :ERROR_NETWORK
 
     echo - Installing pip...
@@ -113,7 +117,9 @@ if exist "%OLLAMA_BIN%" (
 ) else (
     REM Download checksum file
     echo - Downloading checksums...
+    echo.
     "%WGET_BIN%" -O sha256sum.txt "%OLLAMA_CHECKSUM_URL%"
+    echo.
     if !errorlevel! neq 0 goto :ERROR_NETWORK
 
     REM Extract expected hash
@@ -139,7 +145,9 @@ if exist "%OLLAMA_BIN%" (
     REM Download if missing
     if not exist "%OLLAMA_ZIP%" (
         echo - Downloading %OLLAMA_ZIP%...
+        echo.
         "%WGET_BIN%" -O "%OLLAMA_ZIP%" "%OLLAMA_DOWNLOAD_URL%"
+        echo.
         if !errorlevel! neq 0 goto :ERROR_NETWORK
 
         REM Verify downloaded file
