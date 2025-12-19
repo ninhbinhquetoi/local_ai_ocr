@@ -10,7 +10,7 @@
     "dlg_settings_restore": "Khôi phục Mặc định",
     "dlg_settings_apply": "Áp dụng",
     "dlg_settings_cancel": "Hủy",
-    "dlg_settings_error": "<b>Giá trị không hợp lệ!</b><br><br><b>IP Address:</b> Chỉ cho phép chữ cái, số, '/', '.', '-', và ':' (<b>không được</b> kết thúc bằng ':')<br><b>Port:</b> Trong phạm vi 1 - 65535<br><b>AI Model:</b> Chỉ cho phép chữ cái, số, ':', '-', và '_'",
+    "dlg_settings_error": "<b>Lỗi:</b> Giá trị không hợp lệ!<br><br><b>IP Address:</b> Chỉ cho phép chữ cái, số, '/', '.', '-', và ':' (<b>không được</b> kết thúc bằng ':')<br><b>Port:</b> Trong phạm vi 1 - 65535<br><b>AI Model:</b> Chỉ cho phép chữ cái, số, ':', '-', và '_'",
 
     "btn_unload": "Xả Model AI",
 
@@ -19,8 +19,8 @@
     "btn_clear": "Xóa Hàng chờ",
 
     "drop_overlay_text": "Thả tệp tin ở đây",
-    "drop_invalid_files": "Một số tệp được kéo và thả đã bị bỏ qua (định dạng không hỗ trợ)",
-    "drop_order_disclaimer": "Thứ tự của các tệp sau khi kéo và thả có thể bị mất (do giới hạn phần mềm). <br>Vui lòng kiểm tra lại thứ tự tệp tin trong Hàng chờ xử lý.",
+    "drop_invalid_files": "<b>Lưu ý:</b> Một số tệp được kéo và thả đã bị bỏ qua (định dạng không hỗ trợ)",
+    "drop_order_disclaimer": "<b>Lưu ý:</b> Thứ tự của các tệp sau khi kéo và thả có thể bị mất (do giới hạn phần mềm). <br>Vui lòng kiểm tra lại thứ tự tệp tin trong Hàng chờ xử lý.",
 
     "lbl_queue": "Hàng chờ xử lý:",
 
@@ -57,8 +57,8 @@
     "msg_model_unloaded": "Đã giải phóng Model AI khỏi bộ nhớ.",
     "msg_model_not_loaded": "Model AI hiện không có trong bộ nhớ.",
 
-    "msg_connection_error": "Không thể kết nối tới Ollama tại '{}'<br>Bạn nhập đúng <b>IP Address</b> và <b>Port</b> không thế?",
-    "msg_model_missing": "Không thể tìm thấy Model AI: '{}'<br>Bạn nhập đúng <b>Model</b> chưa?",
+    "msg_connection_error": "<b>Lỗi:</b> Không thể kết nối tới Ollama tại '{}'<br>Bạn nhập đúng <b>IP Address</b> và <b>Port</b> không thế?",
+    "msg_model_missing": "<b>Lỗi:</b> Không thể tìm thấy Model AI: '{}'<br>Bạn nhập đúng <b>Model</b> chưa?",
 
     "msg_loop_disclaimer": "<b>Lưu ý:</b> Vì giới hạn kỹ thuật, AI OCR <b>có thể bị kẹt</b> trong vòng lặp vô hạn.<br>Nếu chuyện đó xảy ra, hãy nhấn <b>DỪNG LẠI</b>.",
 

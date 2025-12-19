@@ -10,7 +10,7 @@
     "dlg_settings_restore": "Restore Defaults",
     "dlg_settings_apply": "Apply",
     "dlg_settings_cancel": "Cancel",
-    "dlg_settings_error": "<b>Invalid values!</b><br><br><b>IP Address:</b> Only letters, numbers, '/', '.', '-', and ':' are allowed (not ending in ':')<br><b>Port:</b> Numbers in 1 - 65535 range<br><b>AI Model:</b> Only letters, numbers, ':', '-', and '_' are allowed",
+    "dlg_settings_error": "<b>Error:</b> Invalid values!<br><br><b>IP Address:</b> Only letters, numbers, '/', '.', '-', and ':' are allowed (not ending in ':')<br><b>Port:</b> Numbers in 1 - 65535 range<br><b>AI Model:</b> Only letters, numbers, ':', '-', and '_' are allowed",
 
     "btn_unload": "Unload AI Model",
 
@@ -19,8 +19,8 @@
     "btn_clear": "Clear Queue",
 
     "drop_overlay_text": "Drop files here",
-    "drop_invalid_files": "Some dragged and dropped files were ignored (unsupported format)",
-    "drop_order_disclaimer": "The order of dragged and dropped files may not be correct (due to software limitation). <br>Please check the file ordering in the Processing Queue.",
+    "drop_invalid_files": "<b>Disclaimer:</b> Some dragged and dropped files were ignored (unsupported format)",
+    "drop_order_disclaimer": "<b>Disclaimer:</b> The order of dragged and dropped files may not be correct (due to software limitation). <br>Please check the file ordering in the Processing Queue.",
 
     "lbl_queue": "Processing Queue:",
 
@@ -57,8 +57,8 @@
     "msg_model_unloaded": "AI Model unloaded from memory.",
     "msg_model_not_loaded": "AI Model is not currently loaded.",
 
-    "msg_connection_error": "Cannot connect to Ollama at '{}'<br>Have you typed the correct <b>IP Address</b> and <b>Port</b>?",
-    "msg_model_missing": "Cannot find AI Model: '{}'<br>Have you typed the correct <b>Model</b>?",
+    "msg_connection_error": "<b>Error:</b> Cannot connect to Ollama at '{}'<br>Have you typed the correct <b>IP Address</b> and <b>Port</b>?",
+    "msg_model_missing": "<b>Error:</b> Cannot find AI Model: '{}'<br>Have you typed the correct <b>Model</b>?",
 
     "msg_loop_disclaimer": "<b>Disclaimer:</b> Due to technical limitations, the OCR AI <b>might get stuck</b> in an infinite loop.<br>If that happens please press <b>STOP</b>.",
 
