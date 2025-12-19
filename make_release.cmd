@@ -23,6 +23,7 @@ echo Creating %ARCHIVE_NAME%...
     "demo\" ^
     "src\" ^
     ".gitignore" ^
+    "config.toml" ^
     "env_setup.cmd" ^
     "LICENSE" ^
     "README.md" ^

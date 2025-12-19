@@ -3,6 +3,7 @@
 
 import time
 import os
+import sys
 from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                                QPushButton, QLabel, QSplitter, QComboBox,
                                QMessageBox, QDialog, QDialogButtonBox, QLayout,
@@ -13,9 +14,10 @@ from PySide6.QtGui import QDesktopServices, QIcon
 import config
 import lang_handler
 from ocr_worker import OCRWorker
-from ollama_service import ModelUnloadWorker
+from ollama_service import ModelUnloadWorker, PreCheckWorker
 from .control_panel import ControlPanel
 from .output_panel import OutputPanel
+from .settings_dialog import SettingsDialog
 
 # Windows-specific feature
 if config.WIN_TASKBAR_PROGRESS_SUPPORT:
@@ -79,6 +81,10 @@ class MainWindow(QMainWindow):
         self.btn_about = QPushButton()
         self.btn_about.clicked.connect(self.show_about)
         top_bar.addWidget(self.btn_about)
+
+        self.btn_settings = QPushButton()
+        self.btn_settings.clicked.connect(self.show_settings)
+        top_bar.addWidget(self.btn_settings)
 
         self.btn_unload = QPushButton()
         self.btn_unload.clicked.connect(self.unload_model)
@@ -168,11 +174,19 @@ class MainWindow(QMainWindow):
 
         dlg.exec()
 
+    # ==================== Top Bar: Settings ====================
+    def show_settings(self):
+        dlg = SettingsDialog(self.t, self)
+        if dlg.exec():
+            # Settings changed - recreate client with new host
+            from ollama import Client
+            self.client = Client(host=config.OLLAMA_HOST)
+
     # ==================== Top Bar: Unload ====================
     def unload_model(self):
         # Trigger background worker to unload model from GPU memory.
         self.btn_unload.setEnabled(False)
-        self.btn_unload.setText("...")
+        self.btn_unload.setText(". . .")
 
         self.unload_worker = ModelUnloadWorker(self.client)
         self.unload_worker.finished.connect(self.on_unload_finished)
@@ -186,7 +200,12 @@ class MainWindow(QMainWindow):
         if success:
             QMessageBox.information(self, self.t["title_info"], self.t[message])
         else:
-            QMessageBox.critical(self, self.t["title_error"], message)
+            # Check if it's a connection error
+            if "connect" in message.lower() or "connection" in message.lower():
+                print(f"on_unload_finished(): {message}", file=sys.stderr)
+                QMessageBox.critical(self, self.t["title_error"], self.t["msg_connection_error"].format(config.OLLAMA_HOST))
+            else:
+                QMessageBox.critical(self, self.t["title_error"], message)
 
     # ==================== Top Bar: Language (Right) ====================
     def update_header_toggle_text(self, checked):
@@ -202,6 +221,7 @@ class MainWindow(QMainWindow):
         # Apply translation strings to all UI elements.
         # Top Bar
         self.btn_about.setText(self.t["btn_about"])
+        self.btn_settings.setText(self.t["btn_settings"])
         self.btn_unload.setText(self.t["btn_unload"])
         self.lbl_print_headers.setText(self.t["lbl_print_headers"])
         self.update_header_toggle_text(self.btn_toggle_headers.isChecked())
@@ -237,6 +257,7 @@ class MainWindow(QMainWindow):
     def set_processing_state(self, is_processing):
         # Toggle all UI elements between processing/idle states.
         self.control_panel.set_processing_state(is_processing)
+        self.btn_settings.setEnabled(not is_processing)
         self.btn_unload.setEnabled(not is_processing)
         self.combo_lang.setEnabled(not is_processing)
         self.combo_prompts.setEnabled(not is_processing)
@@ -246,11 +267,36 @@ class MainWindow(QMainWindow):
     @Slot(list)
     def initiate_processing(self, queue):
         # Called when control panel emits start_requested signal.
-        pid = self.combo_prompts.currentData()
-        prompt_template = config.PROMPTS.get(pid, config.PROMPTS[config.DEFAULT_PROMPT])
-        model_name = config.OLLAMA_MODEL
+        # Disable UI while checking
+        self.set_processing_state(True)
 
-        self.start_processing(queue, prompt_template, model_name, pid)
+        # Store queue for later use after pre-check completes
+        self._pending_queue = queue
+        self._pending_pid = self.combo_prompts.currentData()
+
+        # Run pre-checks in background thread
+        self.precheck_worker = PreCheckWorker(self.client, config.OLLAMA_MODEL)
+        self.precheck_worker.finished.connect(self.on_precheck_finished)
+        self.precheck_worker.start()
+
+    @Slot(bool, str, str)
+    def on_precheck_finished(self, success, error_type, error_msg):
+        if not success:
+            self.set_processing_state(False)
+
+            if error_type == 'connection':
+                print(f"on_precheck_finished(): {error_msg}", file=sys.stderr)
+                QMessageBox.critical(self, self.t["title_error"], self.t["msg_connection_error"].format(config.OLLAMA_HOST))
+            elif error_type == 'model':
+                print(f"on_precheck_finished(): {error_msg}", file=sys.stderr)
+                QMessageBox.critical(self, self.t["title_error"], self.t["msg_model_missing"].format(config.OLLAMA_MODEL, config.OLLAMA_MODEL))
+            return
+
+        # Pre-checks passed, show disclaimer then start processing
+        QMessageBox.information(self, self.t["title_disclaimer"], self.t["msg_loop_disclaimer"])
+
+        prompt_template = config.PROMPTS.get(self._pending_pid, config.PROMPTS[config.DEFAULT_PROMPT])
+        self.start_processing(self._pending_queue, prompt_template, config.OLLAMA_MODEL, self._pending_pid)
 
     def start_processing(self, queue, prompt_template, model_name, prompt_id=None):
         # Start OCR worker thread to process the queue.

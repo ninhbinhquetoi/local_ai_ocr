@@ -298,8 +298,6 @@ class ControlPanel(QWidget):
     def on_start_click(self):
         if not self.image_queue: return
 
-        QMessageBox.information(self, self.t["title_disclaimer"], self.t["msg_loop_disclaimer"])
-
         self.progress_bar.setMaximum(len(self.image_queue))
         self.progress_bar.setValue(0)
 
