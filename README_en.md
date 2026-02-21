@@ -1,10 +1,10 @@
 <img src='src/res/icon.png' width='128' height='128'>
 
 ### Languages:
-[English](README_en.md) |
-[Tiếng Việt](README.md)
+[Tiếng Việt](README.md) |
+English
 
-# Local AI OCR (v2.2.2)
+# Local AI OCR (v2.3.0)
 
 An **local**, **offline** (after initial setup), **portable** OCR software that can process images and PDF files, using *DeepSeek-OCR* AI (running directly on your machine).
 
