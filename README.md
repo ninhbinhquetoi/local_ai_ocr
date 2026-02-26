@@ -1,10 +1,10 @@
 <img src='src/res/icon.png' width='128' height='128'>
 
 ### Ngôn ngữ:
-[Tiếng Việt](README.md) |
+Tiếng Việt |
 [English](README_en.md)
 
-# Local AI OCR (v2.2.1)
+# Local AI OCR (v2.3.0)
 
 Một phần mềm OCR **nội bộ**, **offline** (sau khi thiết lập lần đầu), **portable**, có thể xử lý ảnh và tệp PDF, sử dụng AI *DeepSeek-OCR* (chạy nội bộ trực tiếp trên máy).
 

@@ -5,7 +5,7 @@ set "SCRIPTROOT=%~dp0"
 set "PYTHON_BIN=%SCRIPTROOT%python\python.exe"
 set "OLLAMA_BIN=%SCRIPTROOT%ollama\ollama.exe"
 
-REM Avoid port conflict
+@REM Avoid port conflict
 set "OLLAMA_HOST=http://127.0.0.1:11435"
 
 set "OLLAMA_MODELS=%SCRIPTROOT%models"
