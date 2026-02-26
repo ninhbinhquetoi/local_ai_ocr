@@ -9,7 +9,7 @@ set "SCRIPTROOT=%~dp0"
 set "WGET_BIN=%SCRIPTROOT%bin\wget.exe"
 
 set "PYTHON_DIR=%SCRIPTROOT%python"
-set "PYTHON_VER=3.13.11"
+set "PYTHON_VER=3.13.1"
 set "PYTHON_ZIP=python-%PYTHON_VER%-embed-amd64.zip"
 set "PYTHON_URL=https://www.python.org/ftp/python/%PYTHON_VER%/%PYTHON_ZIP%"
 set "PIP_URL=https://bootstrap.pypa.io/get-pip.py"
